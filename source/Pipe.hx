@@ -11,6 +11,7 @@ class Pipe extends FlxTypedGroup<FlxSprite> implements IStopable {
     var bot:FlxSprite;
     var vel:Float;
 
+    private var passed = false;
     private var rand(default, null):FlxRandom;
     private final space:Int = 100;
 
@@ -37,6 +38,7 @@ class Pipe extends FlxTypedGroup<FlxSprite> implements IStopable {
 
         if (top.x + top.width < 0) {
             top.x = FlxG.width;
+            passed = false;
             randomPos();
         }
 
@@ -48,6 +50,15 @@ class Pipe extends FlxTypedGroup<FlxSprite> implements IStopable {
     private function randomPos() {
         top.y = rand.int(50, 250) - top.height;
         bot.y = top.y + top.height + space;
+    }
+
+    public function hasPassed(bird:Bird):Bool {
+        if (bird.x > top.x + top.width && !passed) {
+            passed = true;
+            return true;
+        } 
+
+        return false;
     }
 
     public function stop() {

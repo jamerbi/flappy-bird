@@ -39,7 +39,7 @@ class InitSubState extends FlxSubState {
         titleText.setPosition((FlxG.width - titleText.width) * 0.5, FlxG.height * 0.4);
 
         // todo change font size for both targets
-        scoreText = new FlxText(0, 0, 0, "Best Score: " + 123, 16);
+        scoreText = new FlxText(0, 0, 0, "Best Score: " + new Score().load(), 16);
         scoreText.setPosition((FlxG.width - scoreText.width) * 0.5, FlxG.height * 0.5);
         
         add(background);

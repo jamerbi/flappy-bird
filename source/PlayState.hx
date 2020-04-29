@@ -14,30 +14,34 @@ class PlayState extends FlxState {
 	var base:Parallax;
 	var bird:Bird;
 	var pipes:Pipe;
+
 	var score:Score;
-	var initScreen:InitScreen;
-	var saveData:SaveData;
+	var hud:Hud;
+
 	var gameOver:FlxText;
 
 	override public function create() {
-		saveData = new SaveData();
-		saveData.loadBestScore();
-
+		// background
 		add(new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.fromString("#5fcde4")));
 		add(new Parallax(vel * 0.7, 315, AssetPaths.bg2__png));
 		add(new Parallax(vel * 0.8, 340, AssetPaths.bg3__png));
 		add(new Parallax(vel * 0.9, 368, AssetPaths.bg1__png));
 
+		// entities
 		base = new Parallax(vel, 400, AssetPaths.base__png);
 		bird = new Bird(50, 200, vel);
 		pipes = new Pipe(vel, FlxG.width);
-		score = new Score(FlxG.width * 0.5, FlxG.height * 0.2);
-		score.visible = false;
+
+		// hud
+		score = new Score();
+		hud = new Hud(this);
+		hud.updateBestScore(score.load());
+		hud.hide();
 
 		add(pipes);
 		add(base);
 		add(bird);
-		add(score);
+		add(hud);
 
 		gameOver = new FlxText(0, 0, "Game Over", 24);
 		gameOver.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 2);
@@ -74,21 +78,22 @@ class PlayState extends FlxState {
 			|| bird.y < 0) {
 			FlxG.sound.play(AssetPaths.die__ogg);
 			forEachOfType(IStopable, function (m) m.stop());
-			saveData.saveBestScore(score.score);
+			score.save();
 			gameOver.visible = true;
 			state = Finish;
 		}
 	}
 
 	function updateScore() {
-		if (pipes.members[0].x + pipes.members[0].width < bird.x && score.canAdd) score.addScore();
-		if (pipes.members[0].x == FlxG.width) score.canAdd = true;
+		if (pipes.hasPassed(bird)) {
+			hud.updateScore(++score.current);
+		}
 	}
 
 	public function beginGame() {
 		state = Play;
 		forEachOfType(IStopable, function(m) m.play());
-		score.visible = true;
+		hud.show();
 	}
 
 	function waitFinish() {
