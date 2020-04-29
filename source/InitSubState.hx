@@ -1,3 +1,4 @@
+import openfl.Lib;
 import flixel.tweens.FlxEase;
 import flixel.FlxSprite;
 import flixel.tweens.FlxTween;
@@ -22,6 +23,8 @@ class InitSubState extends FlxSubState {
     }
 
     override function create() {
+        var scale = Lib.current.stage.stageWidth / FlxG.width;
+
         background = new FlxSprite(0, 0);
         background.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
         background.alpha = 0.5;

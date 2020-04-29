@@ -20,7 +20,9 @@ class Hud extends FlxTypedGroup<FlxSprite> {
         scoreText = new FlxText(FlxG.width * 0.5, FlxG.height * 0.2, 0, "", 32);
         scoreText.setBorderStyle(FlxTextBorderStyle.SHADOW, FlxColor.BLACK, 4);
         bestText = new FlxText(0, 0, 0, "", 16);
-        pauseButton = new FlxButton(0, 0, "pause", pauseClick);
+        bestText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1);
+        pauseButton = new FlxButton(0, 0, "", pauseClick);
+        pauseButton.loadGraphic(AssetPaths.pause_button__png, true, 16, 16);
 
         updateScore(0);
         updateBestScore(0);
@@ -49,6 +51,7 @@ class Hud extends FlxTypedGroup<FlxSprite> {
     }
 
     private function pauseClick() {
-        trace("substate changed");
+        parent.openSubState(new PauseSubState());
+        parent.persistentUpdate = false;
     }
 }

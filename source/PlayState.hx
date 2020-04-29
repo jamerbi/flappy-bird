@@ -64,12 +64,8 @@ class PlayState extends FlxState {
 			case Finish:
 				waitFinish();
 			default:
-				trace("default");
+				
 		}
-	}
-
-	override function destroy() {
-		super.destroy();
 	}
 
 	function detectCollision() {
