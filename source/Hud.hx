@@ -22,7 +22,7 @@ class Hud extends FlxTypedGroup<FlxSprite> {
         bestText = new FlxText(0, 0, 0, "", 16);
         bestText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1);
         pauseButton = new FlxButton(0, 0, "", pauseClick);
-        pauseButton.loadGraphic(AssetPaths.pause_button__png, true, 16, 16);
+        pauseButton.loadGraphic(AssetPaths.pause_button__png, true, 32, 32);
 
         updateScore(0);
         updateBestScore(0);

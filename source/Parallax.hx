@@ -2,7 +2,7 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 
-class Parallax extends FlxTypedGroup<FlxSprite> implements IStopable {
+class Parallax extends FlxTypedGroup<FlxSprite> {
 
     var vel:Float;
     var backVel:Float;
@@ -31,14 +31,5 @@ class Parallax extends FlxTypedGroup<FlxSprite> implements IStopable {
         if (spr2.x + spr2.width < 0) spr2.x = spr1.x + spr1.width;
 
         super.update(elapsed);
-    }
-
-    public function stop() {
-        backVel = vel;
-        vel = 0;
-    }
-
-    public function play() {
-        vel = backVel;
     }
 }

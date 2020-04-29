@@ -23,25 +23,19 @@ class InitSubState extends FlxSubState {
     }
 
     override function create() {
-        var scale = Lib.current.stage.stageWidth / FlxG.width;
+        parent.persistentUpdate = true;
 
         background = new FlxSprite(0, 0);
         background.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
         background.alpha = 0.5;
 
-        parent.state = GameState.Init;
-        parent.persistentUpdate = true;
-
-        // todo change size for both targets
         startButton = new FlxButton(0, 0, "Start", startClick);
         startButton.setPosition((FlxG.width - startButton.width) * 0.5, FlxG.height * 0.7);
 
-        // todo change font size for both targets
         titleText = new FlxText(0, 0, 0, "FlappyBird", 16);
         titleText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         titleText.setPosition((FlxG.width - titleText.width) * 0.5, FlxG.height * 0.4);
 
-        // todo change font size for both targets
         scoreText = new FlxText(0, 0, 0, "Best Score: " + new Score().load(), 16);
         scoreText.setPosition((FlxG.width - scoreText.width) * 0.5, FlxG.height * 0.5);
         
@@ -51,16 +45,10 @@ class InitSubState extends FlxSubState {
         add(scoreText);
     }
 
-    override function update(elapsed:Float) {
-        super.update(elapsed);
-    }
-
     private function startClick() {
-        FlxTween.tween(background, {alpha: 0}, 2, {ease: FlxEase.expoIn, onComplete: tweenComplete});
-    }
-
-    private function tweenComplete(tween:FlxTween) {
-        parent.beginGame();
-        close();
+        FlxTween.tween(background, {alpha: 0}, 2, {ease: FlxEase.expoIn, onComplete: function (tween) {
+            parent.hud.show();
+            close();       
+        }});
     }
 }

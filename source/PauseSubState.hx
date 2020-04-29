@@ -15,7 +15,7 @@ class PauseSubState extends FlxSubState {
         background.alpha = 0.5;
 
         playButton = new FlxButton(0, 0, "", playClick);
-        playButton.loadGraphic(AssetPaths.play_button__png, true, 16, 16);
+        playButton.loadGraphic(AssetPaths.play_button__png, true, 64, 64);
         playButton.setPosition((FlxG.width - playButton.width) * 0.5, FlxG.height * 0.5);
 
         add(background);

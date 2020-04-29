@@ -4,23 +4,24 @@ class Score {
     
     inline static private var DATA = "BESTSCORE";
 
-    public var current:Int;
+    public var current = 0;
     static public var memory:FlxSave;
 
     public function new() {
-        current = 0;
         memory = new FlxSave();
     }
 
     public function reset() {
         if (memory.bind(DATA)) {
             memory.data.score = 0;
+            memory.flush();
         }
     }
 
     public function save() {
         if (load() < current) {
             memory.data.score = current;
+            memory.flush();
         }
     }
 

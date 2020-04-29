@@ -3,7 +3,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
 
-class Pipe extends FlxTypedGroup<FlxSprite> implements IStopable {
+class Pipe extends FlxTypedGroup<FlxSprite> {
 
     var backVel:Float;
 
@@ -61,12 +61,7 @@ class Pipe extends FlxTypedGroup<FlxSprite> implements IStopable {
         return false;
     }
 
-    public function stop() {
-        backVel = vel;
-        vel = 0;
-    }
-
-    public function play() {
-        vel = backVel;
+    public function hasTouched(bird:Bird) {
+        return FlxG.pixelPerfectOverlap(bird, top) || FlxG.pixelPerfectOverlap(bird, bot);
     }
 }

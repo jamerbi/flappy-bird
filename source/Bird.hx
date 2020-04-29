@@ -2,7 +2,7 @@ import flixel.input.keyboard.FlxKey;
 import flixel.FlxG;
 import flixel.FlxSprite;
 
-class Bird extends FlxSprite implements IStopable {
+class Bird extends FlxSprite {
 
     private var canMove:Bool;
     private var vel:Float;
@@ -31,19 +31,5 @@ class Bird extends FlxSprite implements IStopable {
         }
 
         super.update(elapsed);
-    }
-
-    public function stop() {
-        canMove = false;
-        acceleration.y = 0;
-        angularAcceleration = 0;
-        velocity.y = 0;
-        angularVelocity = 0;
-    }
-
-    public function play() {
-        canMove = true;
-        acceleration.y = vel * 3;
-        angularAcceleration = vel * 1.5;
     }
 }
