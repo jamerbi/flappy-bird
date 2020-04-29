@@ -23,7 +23,7 @@ class Bird extends FlxSprite implements IStopable {
         if (angle > 45) angle = 45;
         if (angle < -45) angle = -45;
 
-        if (FlxG.keys.anyJustPressed([FlxKey.SPACE]) && canMove) {
+        if (InputProcessor.justPressed() && canMove) {
             velocity.y = -(vel * 1.7);
             angularVelocity = -vel;
             animation.play('wing', true);

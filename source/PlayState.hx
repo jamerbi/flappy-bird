@@ -1,6 +1,5 @@
 package;
 
-import flixel.input.keyboard.FlxKey;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
@@ -91,7 +90,7 @@ class PlayState extends FlxState {
 	}
 
 	function waitInit() {
-		if (FlxG.keys.anyJustPressed([FlxKey.SPACE])) {
+		if (InputProcessor.justPressed()) {
 			state = Play;
 			forEachOfType(IStopable, function(m) m.play());
 			initScreen.forEach(function (m) m.visible = false);
@@ -100,7 +99,7 @@ class PlayState extends FlxState {
 	}
 
 	function waitFinish() {
-		if (FlxG.keys.anyJustPressed([FlxKey.SPACE])) {
+		if (InputProcessor.justPressed()) {
 			create();
 			state = Init;
 		}
