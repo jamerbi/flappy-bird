@@ -5,16 +5,13 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 class Parallax extends FlxTypedGroup<FlxSprite> {
 
     var vel:Float;
-    var backVel:Float;
 
-    private var spr1:FlxSprite;
-    private var spr2:FlxSprite;
+    var spr1:FlxSprite;
+    var spr2:FlxSprite;
 
     public function new(vel:Float, y:Float, img:FlxGraphicAsset) {
         super();
-        
         this.vel = vel;
-        backVel = vel;
 
         spr1 = new FlxSprite(0, y, img);
         spr2 = new FlxSprite(spr1.width, y, img);

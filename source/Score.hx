@@ -2,7 +2,7 @@ import flixel.util.FlxSave;
 
 class Score {
     
-    inline static private var DATA = "BESTSCORE";
+    inline static var DATA = "BESTSCORE";
 
     public var current = 0;
     static public var memory:FlxSave;

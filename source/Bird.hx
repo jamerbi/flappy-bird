@@ -4,8 +4,7 @@ import flixel.FlxSprite;
 
 class Bird extends FlxSprite {
 
-    private var canMove:Bool;
-    private var vel:Float;
+    var vel:Float;
 
     public function new(x:Float, y:Float, vel:Float) {
         super(x, y);
@@ -16,14 +15,13 @@ class Bird extends FlxSprite {
 
         acceleration.y = vel * 3;
         angularAcceleration = vel * 1.5;
-        canMove = true;
     }
 
     override function update(elapsed:Float) {
         if (angle > 45) angle = 45;
         if (angle < -45) angle = -45;
 
-        if (InputProcessor.justPressed() && canMove) {
+        if (InputProcessor.justPressed()) {
             velocity.y = -(vel * 1.7);
             angularVelocity = -vel;
             animation.play('wing', true);

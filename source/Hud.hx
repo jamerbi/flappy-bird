@@ -7,10 +7,10 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 
 class Hud extends FlxTypedGroup<FlxSprite> {
 
-    private var scoreText:FlxText;
-    private var bestText:FlxText;
-    private var pauseButton:FlxButton;
-    private var parent:PlayState;
+    var scoreText:FlxText;
+    var bestText:FlxText;
+    var pauseButton:FlxButton;
+    var parent:PlayState;
 
     public function new(parent:PlayState) {
         super();

@@ -5,26 +5,21 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 
 class Pipe extends FlxTypedGroup<FlxSprite> {
 
-    var backVel:Float;
-
+    var rand:FlxRandom;
     var top:FlxSprite;
     var bot:FlxSprite;
-    var vel:Float;
 
-    private var passed = false;
-    private var rand(default, null):FlxRandom;
-    private final space:Int = 100;
+    var vel = 0.0;
+    var passed = false;
+    inline static var space = 100;
 
     public function new(vel:Float, x:Float) {
         super();
-
         this.vel = vel;
-        backVel = vel;
-        rand = new FlxRandom();
 
+        rand = new FlxRandom();
         top = new FlxSprite(x, 0, AssetPaths.pipe_green__png);
         top.angle = -180;
-
         bot = new FlxSprite(x, 0, AssetPaths.pipe_green__png);
         
         randomPos();
@@ -47,11 +42,6 @@ class Pipe extends FlxTypedGroup<FlxSprite> {
         super.update(elapsed);
     }
 
-    private function randomPos() {
-        top.y = rand.int(50, 250) - top.height;
-        bot.y = top.y + top.height + space;
-    }
-
     public function hasPassed(bird:Bird):Bool {
         if (bird.x > top.x + top.width && !passed) {
             passed = true;
@@ -63,5 +53,10 @@ class Pipe extends FlxTypedGroup<FlxSprite> {
 
     public function hasTouched(bird:Bird) {
         return FlxG.pixelPerfectOverlap(bird, top) || FlxG.pixelPerfectOverlap(bird, bot);
+    }
+
+    private function randomPos() {
+        top.y = rand.int(50, 250) - top.height;
+        bot.y = top.y + top.height + space;
     }
 }
