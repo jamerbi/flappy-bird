@@ -9,7 +9,7 @@ import flixel.FlxState;
 class PlayState extends FlxState {
 
 	var vel:Float = 150;
-	var state:GameState = Init;
+	public var state:GameState = Init;
 
 	var base:Parallax;
 	var bird:Bird;
@@ -39,10 +39,6 @@ class PlayState extends FlxState {
 		add(bird);
 		add(score);
 
-		initScreen = new InitScreen();
-		initScreen.updateScore(saveData.bestScore);
-		add(initScreen);
-
 		gameOver = new FlxText(0, 0, "Game Over", 24);
 		gameOver.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 2);
 		gameOver.setPosition((FlxG.width - gameOver.width) * 0.5, FlxG.height * 0.5);
@@ -50,14 +46,14 @@ class PlayState extends FlxState {
 		add(gameOver);
 
 		forEachOfType(IStopable, function(m) m.stop());
+
+		openSubState(new InitSubState(this));
 	}
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
 
 		switch (state) {
-			case Init:
-				waitInit();
 			case Play:
 				detectCollision();
 				updateScore();
@@ -89,13 +85,10 @@ class PlayState extends FlxState {
 		if (pipes.members[0].x == FlxG.width) score.canAdd = true;
 	}
 
-	function waitInit() {
-		if (InputProcessor.justPressed()) {
-			state = Play;
-			forEachOfType(IStopable, function(m) m.play());
-			initScreen.forEach(function (m) m.visible = false);
-			score.visible = true;
-		}
+	public function beginGame() {
+		state = Play;
+		forEachOfType(IStopable, function(m) m.play());
+		score.visible = true;
 	}
 
 	function waitFinish() {
