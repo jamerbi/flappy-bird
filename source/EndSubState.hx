@@ -28,13 +28,13 @@ class EndSubState extends FlxSubState {
         titleText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         titleText.setPosition((FlxG.width - titleText.width) * 0.5, FlxG.height * 0.3);
 
-        bestText = new FlxText(0, 0, 0, "Best Score: " + parent.score.load());
+        bestText = new FlxText(0, 0, 0, "Best Score: " + parent.score.load(), 20);
         bestText.setBorderStyle(FlxTextBorderStyle.SHADOW, FlxColor.RED, 4);
-        bestText.setPosition((FlxG.width - titleText.width) * 0.5, FlxG.height * 0.5);
+        bestText.setPosition((FlxG.width - bestText.width) * 0.5, FlxG.height * 0.5);
 
-        scoreText = new FlxText(0, 0, 0, "Your Score: " + parent.score.current);
-        scoreText.setBorderStyle(FlxTextBorderStyle.SHADOW, FlxColor.RED, 4);
-        scoreText.setPosition((FlxG.width - titleText.width) * 0.5, FlxG.height * 0.6);
+        scoreText = new FlxText(0, 0, 0, "Your Score: " + parent.score.current, 20);
+        scoreText.setBorderStyle(FlxTextBorderStyle.SHADOW, FlxColor.BLUE, 4);
+        scoreText.setPosition((FlxG.width - scoreText.width) * 0.5, FlxG.height * 0.6);
 
         okButton = new FlxButton(0, 0, "Ok", okClick);
         okButton.setPosition((FlxG.width - okButton.width) * 0.5, FlxG.height * 0.8);
@@ -49,11 +49,13 @@ class EndSubState extends FlxSubState {
     }
 
     private function init() {
+        parent.hud.hide();
         parent.score.save();
         FlxG.sound.play(AssetPaths.die__ogg);
     }
 
     private function okClick() {
-
+        parent.openSubState(new InitSubState(parent));
+        close();
     }
 }

@@ -1,6 +1,5 @@
 package;
 
-import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
 import flixel.FlxG;
@@ -10,12 +9,12 @@ class PlayState extends FlxState {
 
 	public var score:Score;
 	public var hud:Hud;
+	public var bird:Bird;
+	public var pipes:Pipe;
 
 	inline static var vel:Float = 150;
 
 	var base:Base;
-	var bird:Bird;
-	var pipes:Pipe;
 
 	override public function create() {
 		// background
@@ -26,8 +25,8 @@ class PlayState extends FlxState {
 
 		// entities
 		base = new Base(vel, 400, AssetPaths.base__png);
-		bird = new Bird(50, 200, vel);
-		pipes = new Pipe(vel, FlxG.width);
+		bird = new Bird(vel);
+		pipes = new Pipe(vel);
 
 		// hud
 		score = new Score();

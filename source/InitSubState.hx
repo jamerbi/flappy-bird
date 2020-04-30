@@ -1,4 +1,3 @@
-import openfl.Lib;
 import flixel.tweens.FlxEase;
 import flixel.FlxSprite;
 import flixel.tweens.FlxTween;
@@ -19,12 +18,13 @@ class InitSubState extends FlxSubState {
 
     public function new(parent:PlayState) {
         super();
+        parent.bird.resetPosition();
+        parent.pipes.resetPosition();
+        parent.hud.updateScore(parent.score.current = 0);
         this.parent = parent;
     }
 
     override function create() {
-        parent.persistentUpdate = true;
-
         background = new FlxSprite(0, 0);
         background.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
         background.alpha = 0.5;

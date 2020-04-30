@@ -1,4 +1,3 @@
-import flixel.input.keyboard.FlxKey;
 import flixel.FlxG;
 import flixel.FlxSprite;
 
@@ -6,8 +5,8 @@ class Bird extends FlxSprite {
 
     var vel:Float;
 
-    public function new(x:Float, y:Float, vel:Float) {
-        super(x, y);
+    public function new(vel:Float) {
+        super(0, 0);
         this.vel = vel;
 
         loadGraphic(AssetPaths.redbird__png, true, 34, 24);
@@ -29,5 +28,10 @@ class Bird extends FlxSprite {
         }
 
         super.update(elapsed);
+    }
+
+    public function resetPosition() {
+        setPosition(50, 200);
+        angle = 0;
     }
 }

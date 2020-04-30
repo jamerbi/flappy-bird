@@ -13,14 +13,14 @@ class Pipe extends FlxTypedGroup<FlxSprite> {
     var passed = false;
     inline static var space = 100;
 
-    public function new(vel:Float, x:Float) {
+    public function new(vel:Float) {
         super();
         this.vel = vel;
 
         rand = new FlxRandom();
-        top = new FlxSprite(x, 0, AssetPaths.pipe_green__png);
+        top = new FlxSprite(FlxG.width, 0, AssetPaths.pipe_green__png);
         top.angle = -180;
-        bot = new FlxSprite(x, 0, AssetPaths.pipe_green__png);
+        bot = new FlxSprite(FlxG.width, 0, AssetPaths.pipe_green__png);
         
         randomPos();
 
@@ -40,6 +40,11 @@ class Pipe extends FlxTypedGroup<FlxSprite> {
         bot.x = top.x;
 
         super.update(elapsed);
+    }
+
+    public function resetPosition() {
+        forEach(sprite -> sprite.setPosition(FlxG.width, 0));
+        randomPos();
     }
 
     public function hasPassed(bird:Bird):Bool {
